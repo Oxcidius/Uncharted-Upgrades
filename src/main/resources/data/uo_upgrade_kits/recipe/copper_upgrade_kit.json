@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aaa",
+    "aba",
+    "aaa"
+  ],
+  "key": {
+    "a": "minecraft:copper_ingot",
+    "b": "travelersbackpack:blank_upgrade"
+  },
+  "result": {
+    "id": "uo_upgrade_kits:copper_upgrade_kit",
+    "count": 1
+  }
+}

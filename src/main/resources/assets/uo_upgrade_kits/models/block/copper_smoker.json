@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/orientable_with_bottom",
+  "textures": {
+    "front": "uo_upgrade_kits:block/copper_smoker_front",
+    "side": "uo_upgrade_kits:block/copper_smoker_side",
+    "top": "uo_upgrade_kits:block/copper_smoker_top",
+    "bottom": "uo_upgrade_kits:block/copper_smoker_bottom"
+  }
+}

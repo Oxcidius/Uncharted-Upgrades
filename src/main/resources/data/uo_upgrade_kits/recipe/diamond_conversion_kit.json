@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:leather",
+    "uo_upgrade_kits:diamond_upgrade_kit",
+    "uo_upgrade_kits:diamond_upgrade_kit",
+    "uo_upgrade_kits:diamond_upgrade_kit",
+    "uo_upgrade_kits:diamond_upgrade_kit"
+  ],
+  "result": {
+    "id": "uo_upgrade_kits:diamond_conversion_kit",
+    "count": 1
+  }
+}

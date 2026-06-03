@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "uo_upgrade_kits",
+  "version": "${version}",
+  "name": "UO - Upgrade Kits",
+  "description": "Upgrade and conversion kits for reinforced storage and upgraded furnaces in Uncharted Odyssey.",
+  "authors": [
+    "New College Worcester"
+  ],
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "uk.co.newcollegeworcester.uo.upgradekits.UoUpgradeKits"
+    ]
+  },
+  "mixins": [
+    "uo_upgrade_kits.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.19.2",
+    "minecraft": "~1.21.11",
+    "java": ">=21",
+    "fabric-api": "*",
+    "travelersbackpack": "*"
+  },
+  "suggests": {
+    "reinfchest": "*",
+    "reinfbarrel": "*",
+    "reinfshulker": "*",
+    "better-furnaces-and-chests": "*"
+  }
+}

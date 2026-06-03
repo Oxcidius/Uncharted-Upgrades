@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aaa",
+    "aba",
+    "aaa"
+  ],
+  "key": {
+    "a": "minecraft:netherite_ingot",
+    "b": "travelersbackpack:blank_upgrade"
+  },
+  "result": {
+    "id": "uo_upgrade_kits:netherite_upgrade_kit",
+    "count": 1
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "item.uo_upgrade_kits.copper_upgrade_kit": "Copper Upgrade Kit",
+  "item.uo_upgrade_kits.copper_conversion_kit": "Copper Conversion Kit",
+  "item.uo_upgrade_kits.iron_upgrade_kit": "Iron Upgrade Kit",
+  "item.uo_upgrade_kits.iron_conversion_kit": "Iron Conversion Kit",
+  "item.uo_upgrade_kits.gold_upgrade_kit": "Gold Upgrade Kit",
+  "item.uo_upgrade_kits.gold_conversion_kit": "Gold Conversion Kit",
+  "item.uo_upgrade_kits.diamond_upgrade_kit": "Diamond Upgrade Kit",
+  "item.uo_upgrade_kits.diamond_conversion_kit": "Diamond Conversion Kit",
+  "item.uo_upgrade_kits.netherite_upgrade_kit": "Netherite Upgrade Kit",
+  "item.uo_upgrade_kits.netherite_conversion_kit": "Netherite Conversion Kit",
+  "block.uo_upgrade_kits.copper_furnace": "Copper Furnace",
+  "block.uo_upgrade_kits.copper_smoker": "Copper Smoker",
+  "block.uo_upgrade_kits.copper_blast_furnace": "Copper Blast Furnace"
+}

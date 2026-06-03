@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "uk.co.newcollegeworcester.uo.upgradekits.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "ContainersMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

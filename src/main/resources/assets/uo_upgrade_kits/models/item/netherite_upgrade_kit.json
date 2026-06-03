@@ -1,0 +1,6 @@
+{
+  "textures": {
+    "layer0": "uo_upgrade_kits:item/netherite_upgrade_kit"
+  },
+  "parent": "minecraft:item/generated"
+}
