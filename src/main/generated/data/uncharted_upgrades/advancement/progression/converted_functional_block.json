@@ -1,0 +1,29 @@
+{
+  "parent": "uncharted_upgrades:progression/create_conversion_kit",
+  "criteria": {
+    "used_conversion_kit_on_block": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.uncharted_upgrades.converted_functional_block.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "uncharted_upgrades:iron_chest"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.uncharted_upgrades.converted_functional_block.title"
+    }
+  },
+  "requirements": [
+    [
+      "used_conversion_kit_on_block"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/bundle",
+  "textures": {
+    "layer0": "uncharted_upgrades:item/gold_bundle"
+  }
+}

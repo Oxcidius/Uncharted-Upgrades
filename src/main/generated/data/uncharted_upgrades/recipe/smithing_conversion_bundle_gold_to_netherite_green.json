@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "uncharted_upgrades:netherite_conversion_kit",
+  "base": "uncharted_upgrades:gold_green_bundle",
+  "result": {
+    "id": "uncharted_upgrades:netherite_green_bundle"
+  },
+  "template": "uncharted_upgrades:kit_template"
+}

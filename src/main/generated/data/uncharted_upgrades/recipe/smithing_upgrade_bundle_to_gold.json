@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "uncharted_upgrades:gold_upgrade_kit",
+  "base": "uncharted_upgrades:iron_bundle",
+  "result": {
+    "id": "uncharted_upgrades:gold_bundle"
+  },
+  "template": "uncharted_upgrades:kit_template"
+}

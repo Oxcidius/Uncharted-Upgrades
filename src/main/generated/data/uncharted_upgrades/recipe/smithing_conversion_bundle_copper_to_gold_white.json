@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "uncharted_upgrades:gold_conversion_kit",
+  "base": "uncharted_upgrades:copper_white_bundle",
+  "result": {
+    "id": "uncharted_upgrades:gold_white_bundle"
+  },
+  "template": "uncharted_upgrades:kit_template"
+}

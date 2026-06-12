@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": "minecraft:copper_ingot",
+    "b": "uncharted_upgrades:kit_template"
+  },
+  "pattern": [
+    "aaa",
+    "aba",
+    "aaa"
+  ],
+  "result": {
+    "count": 1,
+    "id": "uncharted_upgrades:copper_upgrade_kit"
+  }
+}

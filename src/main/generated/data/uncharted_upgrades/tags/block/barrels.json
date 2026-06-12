@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "uncharted_upgrades:copper_barrel",
+    "uncharted_upgrades:iron_barrel",
+    "uncharted_upgrades:gold_barrel",
+    "uncharted_upgrades:diamond_barrel",
+    "uncharted_upgrades:netherite_barrel"
+  ]
+}

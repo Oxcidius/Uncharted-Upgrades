@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_transmute",
+  "category": "misc",
+  "group": "uo_netherite_shulker_box_dye",
+  "input": "#uncharted_upgrades:netherite_shulker_boxes",
+  "material": "minecraft:white_dye",
+  "result": {
+    "id": "uncharted_upgrades:white_netherite_shulker_box"
+  }
+}

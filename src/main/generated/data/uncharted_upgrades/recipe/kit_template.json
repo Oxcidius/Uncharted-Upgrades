@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "c": "#uncharted_upgrades:cobblestone_variants",
+    "l": "minecraft:leather"
+  },
+  "pattern": [
+    "ccc",
+    "clc",
+    "ccc"
+  ],
+  "result": {
+    "count": 3,
+    "id": "uncharted_upgrades:kit_template"
+  }
+}

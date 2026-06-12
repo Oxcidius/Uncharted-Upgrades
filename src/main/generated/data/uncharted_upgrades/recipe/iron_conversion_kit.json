@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "uncharted_upgrades:copper_upgrade_kit",
+    "uncharted_upgrades:iron_upgrade_kit"
+  ],
+  "result": {
+    "count": 1,
+    "id": "uncharted_upgrades:iron_conversion_kit"
+  }
+}

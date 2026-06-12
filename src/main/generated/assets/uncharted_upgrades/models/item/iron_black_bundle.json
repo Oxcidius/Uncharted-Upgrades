@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/black_bundle",
+  "textures": {
+    "layer0": "uncharted_upgrades:item/iron_black_bundle"
+  }
+}

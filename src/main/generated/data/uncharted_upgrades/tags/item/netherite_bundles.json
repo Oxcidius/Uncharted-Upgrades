@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    "uncharted_upgrades:netherite_bundle",
+    "uncharted_upgrades:netherite_white_bundle",
+    "uncharted_upgrades:netherite_orange_bundle",
+    "uncharted_upgrades:netherite_magenta_bundle",
+    "uncharted_upgrades:netherite_light_blue_bundle",
+    "uncharted_upgrades:netherite_yellow_bundle",
+    "uncharted_upgrades:netherite_lime_bundle",
+    "uncharted_upgrades:netherite_pink_bundle",
+    "uncharted_upgrades:netherite_gray_bundle",
+    "uncharted_upgrades:netherite_light_gray_bundle",
+    "uncharted_upgrades:netherite_cyan_bundle",
+    "uncharted_upgrades:netherite_purple_bundle",
+    "uncharted_upgrades:netherite_blue_bundle",
+    "uncharted_upgrades:netherite_brown_bundle",
+    "uncharted_upgrades:netherite_green_bundle",
+    "uncharted_upgrades:netherite_red_bundle",
+    "uncharted_upgrades:netherite_black_bundle"
+  ]
+}

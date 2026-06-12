@@ -27,6 +27,23 @@ loom {
             client()
             runDir '../'
         }
+        datagen {
+            inherit client
+            name 'Data Generation'
+            vmArg '-Dfabric-api.datagen'
+            vmArg "-Dfabric-api.datagen.output-dir=${file('src/main/generated').absolutePath}"
+            vmArg '-Dfabric-api.datagen.modid=uncharted_upgrades'
+            runDir 'build/datagen'
+        }
+    }
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDir 'src/main/generated'
+            exclude '.cache/**'
+        }
     }
 }
 
@@ -37,22 +54,113 @@ dependencies {
     }
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+
+    def reiJars = fileTree("../mods") {
+        include "RoughlyEnoughItems-*-fabric.jar"
+    }
+    if (!reiJars.isEmpty()) {
+        modCompileOnly reiJars
+    }
+    def clothMathJars = fileTree("../.fabric/processedMods") {
+        include "cloth-basic-math-*.jar"
+    }
+    if (!clothMathJars.isEmpty()) {
+        modCompileOnly clothMathJars
+    }
+    def trashSlotJars = fileTree("../mods") {
+        include "trashslot-fabric-*.jar"
+        include "balm-fabric-*.jar"
+    }
+    if (!trashSlotJars.isEmpty()) {
+        modCompileOnly trashSlotJars
+    }
 }
 
+def releaseVersion = project.version
+
 processResources {
-    inputs.property 'version', project.version
+    inputs.property 'version', releaseVersion
 
     filesMatching('fabric.mod.json') {
-        expand 'version': project.version
+        expand 'version': releaseVersion
     }
 }
 
 tasks.withType(JavaCompile).configureEach {
     it.options.release = 21
+    it.options.compilerArgs.add('-Xlint:deprecation')
 }
+
+def releaseModMetadata = layout.buildDirectory.file('resources/main/fabric.mod.json')
+def releaseLicense = layout.projectDirectory.file('LICENSE')
+def releaseAdvancementDirectory =
+        layout.projectDirectory.dir('src/main/generated/data/uncharted_upgrades/advancement/progression')
+def oldNamespaceResources = fileTree('src/main/resources') {
+    include '**/*uo_upgrade_kits*'
+}
+
+tasks.register('releaseCheck') {
+    group = 'verification'
+    description = 'Validates release metadata and generated advancement structure.'
+    dependsOn processResources
+
+    doLast {
+        def json = new groovy.json.JsonSlurper()
+        def modMetadata = json.parse(releaseModMetadata.get().asFile)
+        assert modMetadata.id == 'uncharted_upgrades'
+        assert modMetadata.name == 'Uncharted Upgrades'
+        assert modMetadata.license == 'MIT'
+        assert modMetadata.icon == 'assets/uncharted_upgrades/textures/item/netherite_conversion_kit.png'
+        assert releaseLicense.asFile.isFile()
+
+        def advancementDir = releaseAdvancementDirectory.asFile
+        def expectedParents = [
+                root: null,
+                kit_template: 'uncharted_upgrades:progression/root',
+                create_upgrade_kit: 'uncharted_upgrades:progression/kit_template',
+                create_conversion_kit: 'uncharted_upgrades:progression/create_upgrade_kit',
+                upgrade_functional_block: 'uncharted_upgrades:progression/create_upgrade_kit',
+                upgrade_functional_item: 'uncharted_upgrades:progression/create_upgrade_kit',
+                converted_functional_block: 'uncharted_upgrades:progression/create_conversion_kit',
+                converted_functional_item: 'uncharted_upgrades:progression/create_conversion_kit',
+                max_upgrade: 'uncharted_upgrades:progression/create_conversion_kit'
+        ]
+        def advancementFiles = advancementDir.listFiles()?.findAll { it.name.endsWith('.json') } ?: []
+        assert advancementFiles.size() == expectedParents.size()
+        expectedParents.each { id, parent ->
+            def advancement = json.parse(new File(advancementDir, "${id}.json"))
+            assert advancement.parent == parent
+        }
+
+        assert oldNamespaceResources.isEmpty()
+    }
+}
+
+check.dependsOn releaseCheck
+
+task copyJarToMods(type: Copy) {
+    dependsOn remapJar
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    from { remapJar.archiveFile.get().asFile }
+    into "$projectDir/../mods"
+    doFirst {
+        delete(file("$projectDir/../mods/${remapJar.archiveFileName.get()}"))
+    }
+    outputs.upToDateWhen { false }
+}
+
+build.finalizedBy(copyJarToMods)
 
 java {
     withSourcesJar()
     sourceCompatibility = JavaVersion.VERSION_21
     targetCompatibility = JavaVersion.VERSION_21
+}
+
+tasks.named('jar') {
+    from('LICENSE')
+}
+
+tasks.named('sourcesJar') {
+    from('LICENSE')
 }

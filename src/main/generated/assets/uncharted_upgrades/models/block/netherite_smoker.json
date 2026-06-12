@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/smoker",
+  "textures": {
+    "bottom": "uncharted_upgrades:block/netherite_smoker_bottom",
+    "front": "uncharted_upgrades:block/netherite_smoker_front",
+    "side": "uncharted_upgrades:block/netherite_smoker_side",
+    "top": "uncharted_upgrades:block/netherite_smoker_top"
+  }
+}

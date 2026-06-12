@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/purple_bundle",
+  "textures": {
+    "layer0": "uncharted_upgrades:item/iron_purple_bundle"
+  }
+}

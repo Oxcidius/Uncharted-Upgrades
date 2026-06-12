@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#uncharted_upgrades:cooking_blocks",
+    "#uncharted_upgrades:shulker_boxes",
+    "#uncharted_upgrades:hoppers"
+  ]
+}

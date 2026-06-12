@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/light_blue_bundle",
+  "textures": {
+    "layer0": "uncharted_upgrades:item/gold_light_blue_bundle"
+  }
+}

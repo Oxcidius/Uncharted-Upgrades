@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": "minecraft:iron_ingot",
+    "b": "uncharted_upgrades:kit_template"
+  },
+  "pattern": [
+    "aaa",
+    "aba",
+    "aaa"
+  ],
+  "result": {
+    "count": 1,
+    "id": "uncharted_upgrades:iron_upgrade_kit"
+  }
+}

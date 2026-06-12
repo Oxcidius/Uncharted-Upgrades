@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "uncharted_upgrades:diamond_upgrade_kit",
+  "base": "uncharted_upgrades:gold_gray_bundle",
+  "result": {
+    "id": "uncharted_upgrades:diamond_gray_bundle"
+  },
+  "template": "uncharted_upgrades:kit_template"
+}

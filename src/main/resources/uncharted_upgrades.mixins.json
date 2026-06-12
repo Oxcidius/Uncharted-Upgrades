@@ -1,0 +1,26 @@
+{
+  "required": true,
+  "package": "uk.co.newcollegeworcester.uo.upgradekits.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "ContainersMixin",
+    "AbstractContainerMenuAccessor",
+    "ItemCombinerMenuAccessor",
+    "SmithingMenuMixin",
+    "BundleItemMixin",
+    "BundleContentsAccessor",
+    "BundleContentsMutableMixin",
+    "ItemStackMixin",
+    "AbstractFurnaceBlockEntityMixin",
+    "AbstractFurnaceBlockEntityInvoker",
+    "SlotMixin"
+  ],
+  "client": [
+    "BundleMouseActionsMixin",
+    "ClientBundleTooltipMixin",
+    "GuiGraphicsMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

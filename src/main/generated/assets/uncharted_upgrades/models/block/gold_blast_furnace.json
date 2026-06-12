@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/blast_furnace",
+  "textures": {
+    "front": "uncharted_upgrades:block/gold_blast_furnace_front",
+    "side": "uncharted_upgrades:block/gold_blast_furnace_side",
+    "top": "uncharted_upgrades:block/gold_blast_furnace_top"
+  }
+}

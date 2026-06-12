@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_transmute",
+  "category": "misc",
+  "group": "uo_gold_shulker_box_dye",
+  "input": "#uncharted_upgrades:gold_shulker_boxes",
+  "material": "minecraft:cyan_dye",
+  "result": {
+    "id": "uncharted_upgrades:cyan_gold_shulker_box"
+  }
+}

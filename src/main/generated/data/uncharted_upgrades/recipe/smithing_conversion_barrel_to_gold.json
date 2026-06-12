@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "uncharted_upgrades:gold_conversion_kit",
+  "base": "minecraft:barrel",
+  "result": {
+    "id": "uncharted_upgrades:gold_barrel"
+  },
+  "template": "uncharted_upgrades:kit_template"
+}

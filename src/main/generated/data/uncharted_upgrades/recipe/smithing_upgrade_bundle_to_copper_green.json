@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "uncharted_upgrades:copper_upgrade_kit",
+  "base": "minecraft:green_bundle",
+  "result": {
+    "id": "uncharted_upgrades:copper_green_bundle"
+  },
+  "template": "uncharted_upgrades:kit_template"
+}

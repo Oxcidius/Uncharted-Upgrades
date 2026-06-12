@@ -1,0 +1,29 @@
+{
+  "criteria": {
+    "entered_world": {
+      "trigger": "minecraft:tick"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "minecraft:gui/advancements/backgrounds/stone",
+    "description": {
+      "translate": "advancements.uncharted_upgrades.root.description"
+    },
+    "frame": "task",
+    "icon": {
+      "count": 1,
+      "id": "uncharted_upgrades:netherite_conversion_kit"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.uncharted_upgrades.root.title"
+    }
+  },
+  "requirements": [
+    [
+      "entered_world"
+    ]
+  ],
+  "sends_telemetry_event": false
+}
