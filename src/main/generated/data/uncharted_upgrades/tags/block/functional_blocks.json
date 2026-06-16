@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#uncharted_upgrades:storage_blocks",
+    "#uncharted_upgrades:hoppers",
+    "#uncharted_upgrades:cooking_blocks"
+  ]
+}

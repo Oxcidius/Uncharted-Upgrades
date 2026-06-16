@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "uncharted_upgrades:netherite_upgrade_kit",
+  "base": "uncharted_upgrades:diamond_red_bundle",
+  "result": {
+    "id": "uncharted_upgrades:netherite_red_bundle"
+  },
+  "template": "uncharted_upgrades:kit_template"
+}

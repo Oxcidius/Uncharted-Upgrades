@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "uncharted_upgrades:gold_conversion_kit",
+  "base": "minecraft:magenta_shulker_box",
+  "result": {
+    "id": "uncharted_upgrades:magenta_gold_shulker_box"
+  },
+  "template": "uncharted_upgrades:kit_template"
+}

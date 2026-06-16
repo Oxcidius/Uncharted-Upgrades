@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "uncharted_upgrades:gold_upgrade_kit",
+  "base": "uncharted_upgrades:gray_iron_shulker_box",
+  "result": {
+    "id": "uncharted_upgrades:gray_gold_shulker_box"
+  },
+  "template": "uncharted_upgrades:kit_template"
+}

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "uncharted_upgrades:netherite_conversion_kit",
+  "base": "uncharted_upgrades:green_gold_shulker_box",
+  "result": {
+    "id": "uncharted_upgrades:green_netherite_shulker_box"
+  },
+  "template": "uncharted_upgrades:kit_template"
+}

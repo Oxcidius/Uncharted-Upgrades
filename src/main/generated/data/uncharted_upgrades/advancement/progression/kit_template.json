@@ -1,0 +1,36 @@
+{
+  "parent": "uncharted_upgrades:progression/root",
+  "criteria": {
+    "has_item_0": {
+      "conditions": {
+        "items": [
+          {
+            "items": "uncharted_upgrades:kit_template"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.uncharted_upgrades.kit_template.description"
+    },
+    "frame": "task",
+    "icon": {
+      "count": 1,
+      "id": "uncharted_upgrades:kit_template"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.uncharted_upgrades.kit_template.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_item_0"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

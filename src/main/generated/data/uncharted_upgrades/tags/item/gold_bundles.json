@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    "uncharted_upgrades:gold_bundle",
+    "uncharted_upgrades:gold_white_bundle",
+    "uncharted_upgrades:gold_orange_bundle",
+    "uncharted_upgrades:gold_magenta_bundle",
+    "uncharted_upgrades:gold_light_blue_bundle",
+    "uncharted_upgrades:gold_yellow_bundle",
+    "uncharted_upgrades:gold_lime_bundle",
+    "uncharted_upgrades:gold_pink_bundle",
+    "uncharted_upgrades:gold_gray_bundle",
+    "uncharted_upgrades:gold_light_gray_bundle",
+    "uncharted_upgrades:gold_cyan_bundle",
+    "uncharted_upgrades:gold_purple_bundle",
+    "uncharted_upgrades:gold_blue_bundle",
+    "uncharted_upgrades:gold_brown_bundle",
+    "uncharted_upgrades:gold_green_bundle",
+    "uncharted_upgrades:gold_red_bundle",
+    "uncharted_upgrades:gold_black_bundle"
+  ]
+}

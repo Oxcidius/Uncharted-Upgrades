@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "uncharted_upgrades:netherite_upgrade_kit",
+  "base": "uncharted_upgrades:lime_diamond_shulker_box",
+  "result": {
+    "id": "uncharted_upgrades:lime_netherite_shulker_box"
+  },
+  "template": "uncharted_upgrades:kit_template"
+}

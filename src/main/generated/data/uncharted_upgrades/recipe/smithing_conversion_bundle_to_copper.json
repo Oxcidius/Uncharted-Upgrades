@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "uncharted_upgrades:copper_conversion_kit",
+  "base": "minecraft:bundle",
+  "result": {
+    "id": "uncharted_upgrades:copper_bundle"
+  },
+  "template": "uncharted_upgrades:kit_template"
+}

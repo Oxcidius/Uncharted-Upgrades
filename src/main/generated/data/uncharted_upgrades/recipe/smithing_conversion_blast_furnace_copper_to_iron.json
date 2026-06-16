@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "uncharted_upgrades:iron_conversion_kit",
+  "base": "uncharted_upgrades:copper_blast_furnace",
+  "result": {
+    "id": "uncharted_upgrades:iron_blast_furnace"
+  },
+  "template": "uncharted_upgrades:kit_template"
+}

@@ -1,0 +1,29 @@
+{
+  "parent": "uncharted_upgrades:progression/create_conversion_kit",
+  "criteria": {
+    "used_netherite_conversion": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.uncharted_upgrades.max_upgrade.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "uncharted_upgrades:netherite_conversion_kit"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.uncharted_upgrades.max_upgrade.title"
+    }
+  },
+  "requirements": [
+    [
+      "used_netherite_conversion"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/smoker_on",
+  "textures": {
+    "bottom": "uncharted_upgrades:block/diamond_smoker_bottom",
+    "front": "uncharted_upgrades:block/diamond_smoker_front_on",
+    "side": "uncharted_upgrades:block/diamond_smoker_side",
+    "top": "uncharted_upgrades:block/diamond_smoker_top"
+  }
+}

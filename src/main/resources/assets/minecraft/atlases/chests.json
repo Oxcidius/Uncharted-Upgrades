@@ -1,0 +1,29 @@
+{
+  "sources": [
+    {
+      "type": "directory",
+      "source": "entity/chest/copper",
+      "prefix": "entity/chest/copper/"
+    },
+    {
+      "type": "directory",
+      "source": "entity/chest/iron",
+      "prefix": "entity/chest/iron/"
+    },
+    {
+      "type": "directory",
+      "source": "entity/chest/gold",
+      "prefix": "entity/chest/gold/"
+    },
+    {
+      "type": "directory",
+      "source": "entity/chest/diamond",
+      "prefix": "entity/chest/diamond/"
+    },
+    {
+      "type": "directory",
+      "source": "entity/chest/netherite",
+      "prefix": "entity/chest/netherite/"
+    }
+  ]
+}

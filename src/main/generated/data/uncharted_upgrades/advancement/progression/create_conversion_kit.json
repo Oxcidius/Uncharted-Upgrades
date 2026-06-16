@@ -1,0 +1,80 @@
+{
+  "parent": "uncharted_upgrades:progression/create_upgrade_kit",
+  "criteria": {
+    "has_item_0": {
+      "conditions": {
+        "items": [
+          {
+            "items": "uncharted_upgrades:copper_conversion_kit"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_item_1": {
+      "conditions": {
+        "items": [
+          {
+            "items": "uncharted_upgrades:iron_conversion_kit"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_item_2": {
+      "conditions": {
+        "items": [
+          {
+            "items": "uncharted_upgrades:gold_conversion_kit"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_item_3": {
+      "conditions": {
+        "items": [
+          {
+            "items": "uncharted_upgrades:diamond_conversion_kit"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_item_4": {
+      "conditions": {
+        "items": [
+          {
+            "items": "uncharted_upgrades:netherite_conversion_kit"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.uncharted_upgrades.create_conversion_kit.description"
+    },
+    "frame": "task",
+    "icon": {
+      "count": 1,
+      "id": "uncharted_upgrades:copper_conversion_kit"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.uncharted_upgrades.create_conversion_kit.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_item_0",
+      "has_item_1",
+      "has_item_2",
+      "has_item_3",
+      "has_item_4"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

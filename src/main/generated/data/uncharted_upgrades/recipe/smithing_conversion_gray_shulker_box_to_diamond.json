@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "uncharted_upgrades:diamond_conversion_kit",
+  "base": "minecraft:gray_shulker_box",
+  "result": {
+    "id": "uncharted_upgrades:gray_diamond_shulker_box"
+  },
+  "template": "uncharted_upgrades:kit_template"
+}

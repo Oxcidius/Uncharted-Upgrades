@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "uncharted_upgrades:copper_upgrade_kit",
+  "base": "minecraft:barrel",
+  "result": {
+    "id": "uncharted_upgrades:copper_barrel"
+  },
+  "template": "uncharted_upgrades:kit_template"
+}

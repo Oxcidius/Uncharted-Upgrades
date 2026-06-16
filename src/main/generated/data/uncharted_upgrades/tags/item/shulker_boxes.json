@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "#uncharted_upgrades:copper_shulker_boxes",
+    "#uncharted_upgrades:iron_shulker_boxes",
+    "#uncharted_upgrades:gold_shulker_boxes",
+    "#uncharted_upgrades:diamond_shulker_boxes",
+    "#uncharted_upgrades:netherite_shulker_boxes"
+  ]
+}

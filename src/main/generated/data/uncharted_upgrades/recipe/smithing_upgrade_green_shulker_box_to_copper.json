@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "uncharted_upgrades:copper_upgrade_kit",
+  "base": "minecraft:green_shulker_box",
+  "result": {
+    "id": "uncharted_upgrades:green_copper_shulker_box"
+  },
+  "template": "uncharted_upgrades:kit_template"
+}

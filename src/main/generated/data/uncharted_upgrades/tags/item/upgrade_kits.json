@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "uncharted_upgrades:copper_upgrade_kit",
+    "uncharted_upgrades:iron_upgrade_kit",
+    "uncharted_upgrades:gold_upgrade_kit",
+    "uncharted_upgrades:diamond_upgrade_kit",
+    "uncharted_upgrades:netherite_upgrade_kit"
+  ]
+}

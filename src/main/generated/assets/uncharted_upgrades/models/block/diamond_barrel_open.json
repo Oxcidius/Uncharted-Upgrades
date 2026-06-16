@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "uncharted_upgrades:block/diamond_barrel_bottom",
+    "side": "uncharted_upgrades:block/diamond_barrel_side",
+    "top": "uncharted_upgrades:block/diamond_barrel_top_open"
+  }
+}

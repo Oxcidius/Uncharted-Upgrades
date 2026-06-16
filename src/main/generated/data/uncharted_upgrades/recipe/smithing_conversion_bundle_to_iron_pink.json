@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "uncharted_upgrades:iron_conversion_kit",
+  "base": "minecraft:pink_bundle",
+  "result": {
+    "id": "uncharted_upgrades:iron_pink_bundle"
+  },
+  "template": "uncharted_upgrades:kit_template"
+}

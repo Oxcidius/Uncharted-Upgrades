@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_transmute",
+  "category": "equipment",
+  "group": "bundle_dye",
+  "input": "#uncharted_upgrades:iron_bundles",
+  "material": "minecraft:brown_dye",
+  "result": {
+    "id": "uncharted_upgrades:iron_brown_bundle"
+  }
+}

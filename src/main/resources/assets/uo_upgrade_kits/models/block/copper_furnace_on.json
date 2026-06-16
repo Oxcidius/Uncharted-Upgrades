@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/orientable",
-  "textures": {
-    "front": "uo_upgrade_kits:block/copper_furnace_front_on",
-    "side": "uo_upgrade_kits:block/copper_furnace_side",
-    "top": "uo_upgrade_kits:block/copper_furnace_top"
-  }
-}

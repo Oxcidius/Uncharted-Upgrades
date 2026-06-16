@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "uncharted_upgrades:copper_chest",
+    "uncharted_upgrades:iron_chest",
+    "uncharted_upgrades:gold_chest",
+    "uncharted_upgrades:diamond_chest",
+    "uncharted_upgrades:netherite_chest"
+  ]
+}

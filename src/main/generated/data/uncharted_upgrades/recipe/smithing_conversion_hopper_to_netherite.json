@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "uncharted_upgrades:netherite_conversion_kit",
+  "base": "minecraft:hopper",
+  "result": {
+    "id": "uncharted_upgrades:netherite_hopper"
+  },
+  "template": "uncharted_upgrades:kit_template"
+}

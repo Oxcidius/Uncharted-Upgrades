@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#uncharted_upgrades:chests",
+    "#uncharted_upgrades:barrels",
+    "#uncharted_upgrades:shulker_boxes"
+  ]
+}

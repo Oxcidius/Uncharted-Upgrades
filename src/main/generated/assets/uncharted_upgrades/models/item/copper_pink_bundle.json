@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/pink_bundle",
+  "textures": {
+    "layer0": "uncharted_upgrades:item/copper_pink_bundle"
+  }
+}

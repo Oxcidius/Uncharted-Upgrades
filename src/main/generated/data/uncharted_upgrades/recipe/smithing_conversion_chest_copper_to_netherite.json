@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "uncharted_upgrades:netherite_conversion_kit",
+  "base": "uncharted_upgrades:copper_chest",
+  "result": {
+    "id": "uncharted_upgrades:netherite_chest"
+  },
+  "template": "uncharted_upgrades:kit_template"
+}

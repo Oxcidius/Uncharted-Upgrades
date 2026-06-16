@@ -1,6 +1,0 @@
-{
-  "textures": {
-    "layer0": "uo_upgrade_kits:item/netherite_conversion_kit"
-  },
-  "parent": "minecraft:item/generated"
-}

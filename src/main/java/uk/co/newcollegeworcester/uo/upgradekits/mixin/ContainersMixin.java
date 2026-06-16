@@ -16,7 +16,7 @@ public final class ContainersMixin {
     }
 
     @Inject(method = "dropContents(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/Container;)V", at = @At("HEAD"), cancellable = true)
-    private static void uo_upgrade_kits$skipUpgradeDrops(Level level, BlockPos pos, Container container, CallbackInfo callbackInfo) {
+    private static void uncharted_upgrades$skipUpgradeDrops(Level level, BlockPos pos, Container container, CallbackInfo callbackInfo) {
         if (UoUpgradeKits.isSuppressingContainerDrops(pos)) {
             callbackInfo.cancel();
         }

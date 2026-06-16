@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "uncharted_upgrades:iron_conversion_kit",
+  "base": "uncharted_upgrades:purple_copper_shulker_box",
+  "result": {
+    "id": "uncharted_upgrades:purple_iron_shulker_box"
+  },
+  "template": "uncharted_upgrades:kit_template"
+}

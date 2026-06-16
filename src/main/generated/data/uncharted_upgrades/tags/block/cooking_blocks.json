@@ -1,0 +1,20 @@
+{
+  "replace": false,
+  "values": [
+    "uncharted_upgrades:copper_furnace",
+    "uncharted_upgrades:copper_smoker",
+    "uncharted_upgrades:copper_blast_furnace",
+    "uncharted_upgrades:iron_furnace",
+    "uncharted_upgrades:iron_smoker",
+    "uncharted_upgrades:iron_blast_furnace",
+    "uncharted_upgrades:gold_furnace",
+    "uncharted_upgrades:gold_smoker",
+    "uncharted_upgrades:gold_blast_furnace",
+    "uncharted_upgrades:diamond_furnace",
+    "uncharted_upgrades:diamond_smoker",
+    "uncharted_upgrades:diamond_blast_furnace",
+    "uncharted_upgrades:netherite_furnace",
+    "uncharted_upgrades:netherite_smoker",
+    "uncharted_upgrades:netherite_blast_furnace"
+  ]
+}

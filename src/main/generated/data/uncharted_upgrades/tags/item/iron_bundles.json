@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    "uncharted_upgrades:iron_bundle",
+    "uncharted_upgrades:iron_white_bundle",
+    "uncharted_upgrades:iron_orange_bundle",
+    "uncharted_upgrades:iron_magenta_bundle",
+    "uncharted_upgrades:iron_light_blue_bundle",
+    "uncharted_upgrades:iron_yellow_bundle",
+    "uncharted_upgrades:iron_lime_bundle",
+    "uncharted_upgrades:iron_pink_bundle",
+    "uncharted_upgrades:iron_gray_bundle",
+    "uncharted_upgrades:iron_light_gray_bundle",
+    "uncharted_upgrades:iron_cyan_bundle",
+    "uncharted_upgrades:iron_purple_bundle",
+    "uncharted_upgrades:iron_blue_bundle",
+    "uncharted_upgrades:iron_brown_bundle",
+    "uncharted_upgrades:iron_green_bundle",
+    "uncharted_upgrades:iron_red_bundle",
+    "uncharted_upgrades:iron_black_bundle"
+  ]
+}

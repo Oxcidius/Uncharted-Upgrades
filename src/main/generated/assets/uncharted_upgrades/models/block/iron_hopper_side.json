@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/hopper_side",
+  "textures": {
+    "inside": "uncharted_upgrades:block/iron_hopper_inside",
+    "particle": "uncharted_upgrades:block/iron_hopper_outside",
+    "side": "uncharted_upgrades:block/iron_hopper_outside",
+    "top": "uncharted_upgrades:block/iron_hopper_top"
+  }
+}
