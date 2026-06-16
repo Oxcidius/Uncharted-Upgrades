@@ -1,6 +1,6 @@
 package uk.co.newcollegeworcester.uo.upgradekits;
 
-import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
+import net.fabricmc.fabric.api.menu.v1.ExtendedMenuProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
@@ -27,7 +27,7 @@ import net.minecraft.world.level.storage.ValueOutput;
 
 import java.util.List;
 
-public final class UoChestBlockEntity extends ChestBlockEntity implements ExtendedScreenHandlerFactory<Integer> {
+public final class UoChestBlockEntity extends ChestBlockEntity implements ExtendedMenuProvider<Integer> {
     private final UpgradeTier tier;
     private final ContainerOpenersCounter uoOpenersCounter = new ContainerOpenersCounter() {
         @Override
@@ -173,7 +173,7 @@ public final class UoChestBlockEntity extends ChestBlockEntity implements Extend
                 soundEvent,
                 SoundSource.BLOCKS,
                 0.5F,
-                level.random.nextFloat() * 0.1F + 0.9F
+                level.getRandom().nextFloat() * 0.1F + 0.9F
         );
     }
 

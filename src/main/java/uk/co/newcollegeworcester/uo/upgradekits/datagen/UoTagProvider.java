@@ -2,7 +2,7 @@ package uk.co.newcollegeworcester.uo.upgradekits.datagen;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 
@@ -22,7 +22,7 @@ final class UoTagProvider implements DataProvider {
 
     private final Path dataPath;
 
-    UoTagProvider(FabricDataOutput output) {
+    UoTagProvider(FabricPackOutput output) {
         this.dataPath = output.getOutputFolder().resolve("data");
     }
 
@@ -71,6 +71,11 @@ final class UoTagProvider implements DataProvider {
         save(output, writes, MOD_ID, "block/chests", tag(tieredIds("chest"), true));
         save(output, writes, MOD_ID, "block/barrels", tag(tieredIds("barrel"), true));
         save(output, writes, MOD_ID, "block/hoppers", tag(tieredIds("hopper"), true));
+        save(output, writes, MOD_ID, "block/storage_blocks", tag(List.of(
+                "#" + MOD_ID + ":chests",
+                "#" + MOD_ID + ":barrels",
+                "#" + MOD_ID + ":shulker_boxes"
+        ), true));
 
         List<String> cookingBlocks = new ArrayList<>();
         for (String tier : TIERS) {
@@ -88,6 +93,11 @@ final class UoTagProvider implements DataProvider {
             }
         }
         save(output, writes, MOD_ID, "block/shulker_boxes", tag(shulkers, true));
+        save(output, writes, MOD_ID, "block/functional_blocks", tag(List.of(
+                "#" + MOD_ID + ":storage_blocks",
+                "#" + MOD_ID + ":hoppers",
+                "#" + MOD_ID + ":cooking_blocks"
+        ), true));
     }
 
     private void generateItemTags(CachedOutput output, List<CompletableFuture<?>> writes) {
@@ -98,6 +108,22 @@ final class UoTagProvider implements DataProvider {
                 "minecraft:blackstone"
         ), false));
 
+        save(output, writes, MOD_ID, "item/chests", tag(tieredIds("chest"), true));
+        save(output, writes, MOD_ID, "item/barrels", tag(tieredIds("barrel"), true));
+        save(output, writes, MOD_ID, "item/hoppers", tag(tieredIds("hopper"), true));
+        save(output, writes, MOD_ID, "item/upgrade_kits", tag(tieredIds("upgrade_kit"), true));
+        save(output, writes, MOD_ID, "item/conversion_kits", tag(tieredIds("conversion_kit"), true));
+
+        List<String> cookingItems = new ArrayList<>();
+        for (String tier : TIERS) {
+            for (String cookingType : COOKING_TYPES) {
+                cookingItems.add(mod(tier + "_" + cookingType));
+            }
+        }
+        save(output, writes, MOD_ID, "item/cooking_blocks", tag(cookingItems, true));
+
+        List<String> allBundles = new ArrayList<>();
+        List<String> allShulkers = new ArrayList<>();
         for (String tier : TIERS) {
             List<String> bundles = new ArrayList<>();
             bundles.add(mod(tier + "_bundle"));
@@ -105,6 +131,7 @@ final class UoTagProvider implements DataProvider {
                 bundles.add(mod(tier + "_" + color + "_bundle"));
             }
             save(output, writes, MOD_ID, "item/" + tier + "_bundles", tag(bundles, true));
+            allBundles.add("#" + MOD_ID + ":" + tier + "_bundles");
 
             List<String> shulkers = new ArrayList<>();
             shulkers.add(mod(tier + "_shulker_box"));
@@ -112,7 +139,30 @@ final class UoTagProvider implements DataProvider {
                 shulkers.add(mod(color + "_" + tier + "_shulker_box"));
             }
             save(output, writes, MOD_ID, "item/" + tier + "_shulker_boxes", tag(shulkers, true));
+            allShulkers.add("#" + MOD_ID + ":" + tier + "_shulker_boxes");
         }
+        save(output, writes, MOD_ID, "item/bundles", tag(allBundles, true));
+        save(output, writes, MOD_ID, "item/shulker_boxes", tag(allShulkers, true));
+        save(output, writes, MOD_ID, "item/storage_blocks", tag(List.of(
+                "#" + MOD_ID + ":chests",
+                "#" + MOD_ID + ":barrels",
+                "#" + MOD_ID + ":shulker_boxes"
+        ), true));
+        save(output, writes, MOD_ID, "item/functional_items", tag(List.of(
+                "#" + MOD_ID + ":bundles",
+                "#" + MOD_ID + ":shulker_boxes",
+                "#" + MOD_ID + ":hoppers"
+        ), true));
+        save(output, writes, MOD_ID, "item/functional_blocks", tag(List.of(
+                "#" + MOD_ID + ":storage_blocks",
+                "#" + MOD_ID + ":hoppers",
+                "#" + MOD_ID + ":cooking_blocks"
+        ), true));
+        save(output, writes, MOD_ID, "item/kits", tag(List.of(
+                MOD_ID + ":kit_template",
+                "#" + MOD_ID + ":upgrade_kits",
+                "#" + MOD_ID + ":conversion_kits"
+        ), true));
     }
 
     private List<String> tieredIds(String suffix) {

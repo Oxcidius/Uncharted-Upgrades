@@ -29,7 +29,7 @@ public abstract class BundleContentsMutableMixin {
     private Fraction weight;
 
     @Shadow
-    private int getMaxAmountToAdd(ItemStack stack) {
+    private int getMaxAmountToAdd(Fraction itemWeight) {
         throw new AssertionError();
     }
 
@@ -71,13 +71,13 @@ public abstract class BundleContentsMutableMixin {
             return;
         }
 
-        int amount = Math.min(source.getCount(), getMaxAmountToAdd(source));
+        Fraction itemWeight = BundleContentsAccessor.uncharted_upgrades$getWeight(source).getOrThrow();
+        int amount = Math.min(source.getCount(), getMaxAmountToAdd(itemWeight));
         if (amount == 0) {
             callback.setReturnValue(0);
             return;
         }
 
-        Fraction itemWeight = BundleContentsAccessor.uncharted_upgrades$getWeight(source);
         this.weight = this.weight.add(itemWeight.multiplyBy(Fraction.getFraction(amount, 1)));
 
         int remaining = amount;

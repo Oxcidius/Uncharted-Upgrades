@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "uncharted_upgrades:kit_template",
+    "#uncharted_upgrades:upgrade_kits",
+    "#uncharted_upgrades:conversion_kits"
+  ]
+}

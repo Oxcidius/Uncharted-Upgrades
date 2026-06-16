@@ -2,7 +2,7 @@ package uk.co.newcollegeworcester.uo.upgradekits.datagen;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 
@@ -22,7 +22,7 @@ final class UoModelProvider implements DataProvider {
 
     private final Path assetsPath;
 
-    UoModelProvider(FabricDataOutput output) {
+    UoModelProvider(FabricPackOutput output) {
         this.assetsPath = output.getOutputFolder().resolve("assets").resolve(MOD_ID);
     }
 
@@ -283,7 +283,38 @@ final class UoModelProvider implements DataProvider {
         rootModel.addProperty("type", "minecraft:special");
         rootModel.addProperty("base", "minecraft:item/shulker_box");
         rootModel.add("model", special);
+        rootModel.add("transformation", shulkerItemTransformation());
         return wrapped("model", rootModel);
+    }
+
+    private JsonObject shulkerItemTransformation() {
+        JsonObject transformation = new JsonObject();
+        JsonArray leftRotation = new JsonArray();
+        leftRotation.add(1.0);
+        leftRotation.add(0.0);
+        leftRotation.add(0.0);
+        leftRotation.add(0.0);
+        transformation.add("left_rotation", leftRotation);
+
+        JsonArray rightRotation = new JsonArray();
+        rightRotation.add(-0.0);
+        rightRotation.add(-0.0);
+        rightRotation.add(-0.0);
+        rightRotation.add(1.0);
+        transformation.add("right_rotation", rightRotation);
+
+        JsonArray scale = new JsonArray();
+        scale.add(0.9995);
+        scale.add(0.9995);
+        scale.add(0.9995);
+        transformation.add("scale", scale);
+
+        JsonArray translation = new JsonArray();
+        translation.add(0.5);
+        translation.add(1.4995);
+        translation.add(0.5);
+        transformation.add("translation", translation);
+        return transformation;
     }
 
     private JsonObject bundleItemDefinition(String tier, String color) {

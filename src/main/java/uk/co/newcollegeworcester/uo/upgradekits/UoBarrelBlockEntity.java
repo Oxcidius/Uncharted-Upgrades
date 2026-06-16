@@ -1,6 +1,6 @@
 package uk.co.newcollegeworcester.uo.upgradekits;
 
-import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
+import net.fabricmc.fabric.api.menu.v1.ExtendedMenuProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -27,7 +27,7 @@ import net.minecraft.world.level.storage.ValueOutput;
 
 import java.util.List;
 
-public final class UoBarrelBlockEntity extends RandomizableContainerBlockEntity implements ExtendedScreenHandlerFactory<Integer> {
+public final class UoBarrelBlockEntity extends RandomizableContainerBlockEntity implements ExtendedMenuProvider<Integer> {
     private final UpgradeTier tier;
     private final ContainerOpenersCounter openersCounter = new ContainerOpenersCounter() {
         @Override
@@ -145,6 +145,6 @@ public final class UoBarrelBlockEntity extends RandomizableContainerBlockEntity 
         double x = worldPosition.getX() + 0.5D + direction.getStepX() / 2.0D;
         double y = worldPosition.getY() + 0.5D + direction.getStepY() / 2.0D;
         double z = worldPosition.getZ() + 0.5D + direction.getStepZ() / 2.0D;
-        level.playSound(null, x, y, z, soundEvent, SoundSource.BLOCKS, 0.5F, level.random.nextFloat() * 0.1F + 0.9F);
+        level.playSound(null, x, y, z, soundEvent, SoundSource.BLOCKS, 0.5F, level.getRandom().nextFloat() * 0.1F + 0.9F);
     }
 }

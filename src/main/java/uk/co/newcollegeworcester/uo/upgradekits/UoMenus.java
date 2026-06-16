@@ -1,6 +1,6 @@
 package uk.co.newcollegeworcester.uo.upgradekits;
 
-import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
+import net.fabricmc.fabric.api.menu.v1.ExtendedMenuType;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -16,7 +16,7 @@ final class UoMenus {
         chest = Registry.register(
                 BuiltInRegistries.MENU,
                 UoRegistries.id("uo_chest"),
-                new ExtendedScreenHandlerType<>(UoChestMenu::new, ByteBufCodecs.VAR_INT)
+                new ExtendedMenuType<>(UoChestMenu::new, ByteBufCodecs.VAR_INT)
         );
     }
 

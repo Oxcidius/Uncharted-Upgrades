@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "uncharted_upgrades:copper_hopper",
+    "uncharted_upgrades:iron_hopper",
+    "uncharted_upgrades:gold_hopper",
+    "uncharted_upgrades:diamond_hopper",
+    "uncharted_upgrades:netherite_hopper"
+  ]
+}

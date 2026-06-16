@@ -2,9 +2,9 @@ package uk.co.newcollegeworcester.uo.upgradekits;
 
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientBundleTooltip;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.component.BundleContents;
 
 import java.util.List;
@@ -23,7 +23,7 @@ public final class TieredBundleClientTooltip extends ClientBundleTooltip impleme
         this.capacity = tooltip.capacity();
         this.fullContents = tooltip.contents();
         this.pageCount = Math.max(1, (tooltip.contents().size() + PAGE_SIZE - 1) / PAGE_SIZE);
-        int selected = tooltip.contents().getSelectedItem();
+        int selected = tooltip.contents().getSelectedItemIndex();
         this.page = selected < 0 ? 0 : selected / PAGE_SIZE;
     }
 
@@ -43,11 +43,11 @@ public final class TieredBundleClientTooltip extends ClientBundleTooltip impleme
     }
 
     @Override
-    public void renderImage(Font font, int x, int y, int width, int height, GuiGraphics graphics) {
-        super.renderImage(font, x, y, width, height, graphics);
+    public void extractImage(Font font, int x, int y, int width, int height, GuiGraphicsExtractor graphics) {
+        super.extractImage(font, x, y, width, height, graphics);
         if (pageCount > 1) {
             Component indicator = Component.literal((page + 1) + "/" + pageCount);
-            graphics.drawCenteredString(font, indicator, x + getWidth(font) / 2, y + super.getHeight(font) + 1, 0xFFFFFFFF);
+            graphics.centeredText(font, indicator, x + getWidth(font) / 2, y + super.getHeight(font) + 1, 0xFFFFFFFF);
         }
     }
 
@@ -56,10 +56,10 @@ public final class TieredBundleClientTooltip extends ClientBundleTooltip impleme
             return contents;
         }
 
-        int selected = contents.getSelectedItem();
+        int selected = contents.getSelectedItemIndex();
         int pageStart = selected < 0 ? 0 : (selected / PAGE_SIZE) * PAGE_SIZE;
-        List<ItemStack> allItems = contents.itemCopyStream().toList();
-        List<ItemStack> pageItems = allItems.subList(pageStart, Math.min(pageStart + PAGE_SIZE, allItems.size()));
+        List<ItemStackTemplate> allItems = contents.items();
+        List<ItemStackTemplate> pageItems = allItems.subList(pageStart, Math.min(pageStart + PAGE_SIZE, allItems.size()));
         BundleContents page = new BundleContents(pageItems);
 
         if (selected >= pageStart && selected < pageStart + pageItems.size()) {

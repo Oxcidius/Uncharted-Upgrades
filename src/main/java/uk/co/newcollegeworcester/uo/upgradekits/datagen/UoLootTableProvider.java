@@ -2,7 +2,7 @@ package uk.co.newcollegeworcester.uo.upgradekits.datagen;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 
@@ -24,7 +24,7 @@ final class UoLootTableProvider implements DataProvider {
 
     private final Path lootTablesPath;
 
-    UoLootTableProvider(FabricDataOutput output) {
+    UoLootTableProvider(FabricPackOutput output) {
         this.lootTablesPath = output.getOutputFolder()
                 .resolve("data")
                 .resolve(MOD_ID)

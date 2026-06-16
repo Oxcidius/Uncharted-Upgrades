@@ -85,7 +85,11 @@ final class UoBlocks {
         EnumMap<UoShulkerVariant, Block> tierBlocks = new EnumMap<>(UoShulkerVariant.class);
         SHULKER_BLOCKS.put(tier, tierBlocks);
         for (UoShulkerVariant variant : UoShulkerVariant.values()) {
-            Block vanillaBlock = ShulkerBoxBlock.getBlockByColor(variant.color);
+            Block vanillaBlock = variant.color == null
+                    ? Blocks.SHULKER_BOX
+                    : BuiltInRegistries.BLOCK.getValue(
+                            Identifier.withDefaultNamespace(variant.color.getName() + "_shulker_box")
+                    );
             tierBlocks.put(variant, registerBlock(
                     variant.blockId(tier),
                     properties -> new UoShulkerBlock(

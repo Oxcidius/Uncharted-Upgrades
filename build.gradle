@@ -1,18 +1,7 @@
-buildscript {
-    repositories {
-        maven {
-            name = 'Fabric'
-            url = 'https://maven.fabricmc.net/'
-        }
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'net.fabricmc:fabric-loom:1.14.10'
-    }
+plugins {
+    id 'net.fabricmc.fabric-loom' version "${loom_version}"
+    id 'maven-publish'
 }
-
-apply plugin: 'fabric-loom'
-apply plugin: 'maven-publish'
 
 version = project.mod_version
 group = project.maven_group
@@ -49,30 +38,31 @@ sourceSets {
 
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings loom.layered {
-        officialMojangMappings()
-    }
-    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+    implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 
     def reiJars = fileTree("../mods") {
         include "RoughlyEnoughItems-*-fabric.jar"
     }
     if (!reiJars.isEmpty()) {
-        modCompileOnly reiJars
+        compileOnly reiJars
+    }
+    def jeiJars = files(
+            fileTree("../mods") {
+                include "jei-*-fabric-*.jar"
+            },
+            fileTree("$projectDir/../../../26.1.2/minecraft/mods") {
+                include "jei-*-fabric-*.jar"
+            }
+    )
+    if (!jeiJars.isEmpty()) {
+        compileOnly jeiJars
     }
     def clothMathJars = fileTree("../.fabric/processedMods") {
         include "cloth-basic-math-*.jar"
     }
     if (!clothMathJars.isEmpty()) {
-        modCompileOnly clothMathJars
-    }
-    def trashSlotJars = fileTree("../mods") {
-        include "trashslot-fabric-*.jar"
-        include "balm-fabric-*.jar"
-    }
-    if (!trashSlotJars.isEmpty()) {
-        modCompileOnly trashSlotJars
+        compileOnly clothMathJars
     }
 }
 
@@ -87,7 +77,7 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach {
-    it.options.release = 21
+    it.options.release = 25
     it.options.compilerArgs.add('-Xlint:deprecation')
 }
 
@@ -139,12 +129,12 @@ tasks.register('releaseCheck') {
 check.dependsOn releaseCheck
 
 task copyJarToMods(type: Copy) {
-    dependsOn remapJar
+    dependsOn jar
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
-    from { remapJar.archiveFile.get().asFile }
-    into "$projectDir/../mods"
+    from { tasks.named('jar').get().archiveFile.get().asFile }
+    into "$projectDir/../../../26.1.2/minecraft/mods"
     doFirst {
-        delete(file("$projectDir/../mods/${remapJar.archiveFileName.get()}"))
+        delete(file("$projectDir/../../../26.1.2/minecraft/mods/${tasks.named('jar').get().archiveFileName.get()}"))
     }
     outputs.upToDateWhen { false }
 }
@@ -153,8 +143,8 @@ build.finalizedBy(copyJarToMods)
 
 java {
     withSourcesJar()
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
+    sourceCompatibility = JavaVersion.VERSION_25
+    targetCompatibility = JavaVersion.VERSION_25
 }
 
 tasks.named('jar') {

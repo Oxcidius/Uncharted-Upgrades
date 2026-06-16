@@ -8,7 +8,7 @@ final class UoNetworking {
     }
 
     static void register() {
-        PayloadTypeRegistry.playC2S().register(UoChestActionPayload.TYPE, UoChestActionPayload.CODEC);
+        PayloadTypeRegistry.serverboundPlay().register(UoChestActionPayload.TYPE, UoChestActionPayload.CODEC);
         ServerPlayNetworking.registerGlobalReceiver(UoChestActionPayload.TYPE, (payload, context) ->
                 context.server().execute(() -> {
                     if (context.player().containerMenu instanceof UoChestMenu menu) {

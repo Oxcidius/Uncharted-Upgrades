@@ -1,6 +1,6 @@
 package uk.co.newcollegeworcester.uo.upgradekits;
 
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTab;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -12,7 +12,7 @@ final class UoCreativeTab {
     }
 
     static void register() {
-        CreativeModeTab tab = FabricItemGroup.builder()
+        CreativeModeTab tab = FabricCreativeModeTab.builder()
                 .title(Component.translatable("itemGroup.uncharted_upgrades.main"))
                 .icon(() -> new ItemStack(UoItems.kitTemplate()))
                 .displayItems((parameters, output) -> {

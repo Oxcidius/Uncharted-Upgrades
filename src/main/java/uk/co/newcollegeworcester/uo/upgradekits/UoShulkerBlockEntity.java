@@ -1,6 +1,6 @@
 package uk.co.newcollegeworcester.uo.upgradekits;
 
-import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
+import net.fabricmc.fabric.api.menu.v1.ExtendedMenuProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -31,7 +31,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.entity.monster.Shulker;
 
-public final class UoShulkerBlockEntity extends RandomizableContainerBlockEntity implements ExtendedScreenHandlerFactory<Integer>, WorldlyContainer {
+public final class UoShulkerBlockEntity extends RandomizableContainerBlockEntity implements ExtendedMenuProvider<Integer>, WorldlyContainer {
     private enum AnimationStatus {
         CLOSED,
         OPENING,
@@ -153,7 +153,7 @@ public final class UoShulkerBlockEntity extends RandomizableContainerBlockEntity
         level.blockEvent(worldPosition, getBlockState().getBlock(), 1, openCount);
         if (openCount == 1) {
             level.gameEvent(user.getLivingEntity(), GameEvent.CONTAINER_OPEN, worldPosition);
-            level.playSound(null, worldPosition, SoundEvents.SHULKER_BOX_OPEN, SoundSource.BLOCKS, 0.5F, level.random.nextFloat() * 0.1F + 0.9F);
+            level.playSound(null, worldPosition, SoundEvents.SHULKER_BOX_OPEN, SoundSource.BLOCKS, 0.5F, level.getRandom().nextFloat() * 0.1F + 0.9F);
         }
     }
 
@@ -166,7 +166,7 @@ public final class UoShulkerBlockEntity extends RandomizableContainerBlockEntity
         level.blockEvent(worldPosition, getBlockState().getBlock(), 1, openCount);
         if (openCount == 0) {
             level.gameEvent(user.getLivingEntity(), GameEvent.CONTAINER_CLOSE, worldPosition);
-            level.playSound(null, worldPosition, SoundEvents.SHULKER_BOX_CLOSE, SoundSource.BLOCKS, 0.5F, level.random.nextFloat() * 0.1F + 0.9F);
+            level.playSound(null, worldPosition, SoundEvents.SHULKER_BOX_CLOSE, SoundSource.BLOCKS, 0.5F, level.getRandom().nextFloat() * 0.1F + 0.9F);
         }
     }
 

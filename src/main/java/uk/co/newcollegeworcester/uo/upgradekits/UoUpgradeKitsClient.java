@@ -2,7 +2,6 @@ package uk.co.newcollegeworcester.uo.upgradekits;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
-import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -22,9 +21,6 @@ public final class UoUpgradeKitsClient implements ClientModInitializer {
         );
         UoRegistries.shulkerBlockEntityTypes().forEach(type ->
                 BlockEntityRenderers.register(type, UoShulkerBlockEntityRenderer::new)
-        );
-        TooltipComponentCallback.EVENT.register(data ->
-                data instanceof TieredBundleTooltip tooltip ? new TieredBundleClientTooltip(tooltip) : null
         );
         ItemTooltipCallback.EVENT.register((stack, context, flag, lines) -> addUoTooltip(stack, lines));
 

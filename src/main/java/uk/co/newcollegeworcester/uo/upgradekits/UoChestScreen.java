@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
@@ -65,21 +65,16 @@ public final class UoChestScreen extends AbstractContainerScreen<UoChestMenu> {
     private int checkedChildCount = -1;
 
     public UoChestScreen(UoChestMenu menu, Inventory playerInventory, Component title) {
-        super(menu, playerInventory, title);
-        imageWidth = 176;
-        imageHeight = 114 + menu.getVisibleRows() * 18;
+        super(menu, playerInventory, title, 176, initialImageHeight(menu, title));
+        titleHeaderOffset = titleHeaderOffset(title);
         titleLabelX = 8;
         titleLabelY = 6;
         inventoryLabelX = 8;
-        inventoryLabelY = menu.getPlayerInventoryY() - 11;
+        inventoryLabelY = menu.getPlayerInventoryY() - 11 + titleHeaderOffset;
     }
 
     @Override
     protected void init() {
-        int titleWidth = 8 + (COLUMNS - 3) * HEADER_BUTTON_SPACING - TITLE_BUTTON_GAP;
-        titleHeaderOffset = Minecraft.getInstance().font.width(title) > titleWidth ? WRAPPED_TITLE_EXTRA_HEIGHT : 0;
-        imageHeight = 114 + menu.getVisibleRows() * 18 + titleHeaderOffset;
-        inventoryLabelY = menu.getPlayerInventoryY() - 11 + titleHeaderOffset;
         super.init();
         menu.setScrollRow(scrollRow, titleHeaderOffset);
         addHeaderButtons();
@@ -88,13 +83,12 @@ public final class UoChestScreen extends AbstractContainerScreen<UoChestMenu> {
     }
 
     @Override
-    public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+    public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTick) {
         suppressClientSortButtonsIfChanged();
         focusSearchBoxIfRequested();
         applyChestSlotLayout();
-        super.render(graphics, mouseX, mouseY, partialTick);
+        super.extractRenderState(graphics, mouseX, mouseY, partialTick);
         drawScrollbar(graphics, getScrollbarTrackX(), getScrollbarTrackY());
-        renderTooltip(graphics, mouseX, mouseY);
     }
 
     @Override
@@ -158,7 +152,7 @@ public final class UoChestScreen extends AbstractContainerScreen<UoChestMenu> {
     }
 
     @Override
-    protected void renderBg(GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
+    public void extractBackground(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTick) {
         int x = leftPos;
         int y = topPos;
         int chestHeight = menu.getVisibleRows() * 18 + 17;
@@ -171,16 +165,16 @@ public final class UoChestScreen extends AbstractContainerScreen<UoChestMenu> {
     }
 
     @Override
-    protected void renderLabels(GuiGraphics graphics, int mouseX, int mouseY) {
+    protected void extractLabels(GuiGraphicsExtractor graphics, int mouseX, int mouseY) {
         if (searchBox == null || !searchBox.visible) {
             int titleWidth = getHeaderButtonsX() - leftPos - titleLabelX - TITLE_BUTTON_GAP;
             var titleLines = font.split(title, titleWidth);
             int lineCount = Math.min(titleHeaderOffset > 0 ? 2 : 1, titleLines.size());
             for (int line = 0; line < lineCount; line++) {
-                graphics.drawString(font, titleLines.get(line), titleLabelX, titleLabelY + line * 9, LABEL_COLOR, false);
+                graphics.text(font, titleLines.get(line), titleLabelX, titleLabelY + line * 9, LABEL_COLOR, false);
             }
         }
-        graphics.drawString(font, playerInventoryTitle, inventoryLabelX, inventoryLabelY, LABEL_COLOR, false);
+        graphics.text(font, playerInventoryTitle, inventoryLabelX, inventoryLabelY, LABEL_COLOR, false);
     }
 
     private void addHeaderButtons() {
@@ -252,6 +246,15 @@ public final class UoChestScreen extends AbstractContainerScreen<UoChestMenu> {
 
     private int getHeaderButtonsX() {
         return leftPos + 8 + (COLUMNS - 3) * HEADER_BUTTON_SPACING + (HEADER_BUTTON_SPACING - HEADER_BUTTON_SIZE) / 2;
+    }
+
+    private static int initialImageHeight(UoChestMenu menu, Component title) {
+        return 114 + menu.getVisibleRows() * 18 + titleHeaderOffset(title);
+    }
+
+    private static int titleHeaderOffset(Component title) {
+        int titleWidth = 8 + (COLUMNS - 3) * HEADER_BUTTON_SPACING - TITLE_BUTTON_GAP;
+        return Minecraft.getInstance().font.width(title) > titleWidth ? WRAPPED_TITLE_EXTRA_HEIGHT : 0;
     }
 
     private void toggleSearch() {
@@ -336,7 +339,7 @@ public final class UoChestScreen extends AbstractContainerScreen<UoChestMenu> {
         return matches;
     }
 
-    private void drawScrollbar(GuiGraphics graphics, int x, int y) {
+    private void drawScrollbar(GuiGraphicsExtractor graphics, int x, int y) {
         if (getMaxScrollRow() <= 0) {
             return;
         }
@@ -410,7 +413,7 @@ public final class UoChestScreen extends AbstractContainerScreen<UoChestMenu> {
         return getScrollbarX() + (usableWidth - SCROLLBAR_WIDTH) / 2;
     }
 
-    private void drawCreativeScrollbarTrack(GuiGraphics graphics, int x, int y, int height) {
+    private void drawCreativeScrollbarTrack(GuiGraphicsExtractor graphics, int x, int y, int height) {
         graphics.blit(
             RenderPipelines.GUI_TEXTURED,
             CREATIVE_BACKGROUND,
@@ -462,7 +465,7 @@ public final class UoChestScreen extends AbstractContainerScreen<UoChestMenu> {
         return menu.getVisibleRows() * 18 - SCROLLBAR_SIDEBAR_PADDING * 2;
     }
 
-    private void drawScrollbarSidebar(GuiGraphics graphics) {
+    private void drawScrollbarSidebar(GuiGraphicsExtractor graphics) {
         if (!hasScrollbar()) {
             return;
         }
@@ -548,8 +551,8 @@ public final class UoChestScreen extends AbstractContainerScreen<UoChestMenu> {
         }
 
         @Override
-        protected void renderContents(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-            renderDefaultSprite(graphics);
+        protected void extractContents(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTick) {
+            extractDefaultSprite(graphics);
             int x = getX() + (getWidth() - HEADER_GLYPH_SIZE) / 2;
             int y = getY() + (getHeight() - HEADER_GLYPH_SIZE) / 2;
             graphics.blit(RenderPipelines.GUI_TEXTURED, glyph, x, y, 0.0F, 0.0F, HEADER_GLYPH_SIZE, HEADER_GLYPH_SIZE, HEADER_GLYPH_SIZE, HEADER_GLYPH_SIZE);

@@ -1,6 +1,6 @@
 package uk.co.newcollegeworcester.uo.upgradekits;
 
-import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
+import net.fabricmc.fabric.api.menu.v1.ExtendedMenuProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -70,12 +70,12 @@ public final class UoChestBlock extends ChestBlock {
         return Component.translatable("block." + UoUpgradeKits.MOD_ID + "." + tier.id + "_chest");
     }
 
-    private static ExtendedScreenHandlerFactory<Integer> createMenuProvider(
+    private static ExtendedMenuProvider<Integer> createMenuProvider(
             Container container,
             int slots,
             Component title
     ) {
-        return new ExtendedScreenHandlerFactory<>() {
+        return new ExtendedMenuProvider<>() {
             @Override
             public Integer getScreenOpeningData(ServerPlayer player) {
                 return slots;

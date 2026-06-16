@@ -9,11 +9,10 @@ import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
-import net.minecraft.client.renderer.rendertype.RenderType;
-import net.minecraft.client.renderer.state.CameraRenderState;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.resources.model.Material;
-import net.minecraft.client.resources.model.MaterialSet;
+import net.minecraft.client.resources.model.sprite.SpriteGetter;
+import net.minecraft.client.resources.model.sprite.SpriteId;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.state.BlockState;
@@ -23,14 +22,14 @@ import net.minecraft.world.phys.Vec3;
 import java.util.EnumMap;
 
 public final class UoChestBlockEntityRenderer implements BlockEntityRenderer<UoChestBlockEntity, UoChestRenderState> {
-    private static final EnumMap<UpgradeTier, EnumMap<ChestType, Material>> MATERIALS = createMaterials();
-    private final MaterialSet materials;
+    private static final EnumMap<UpgradeTier, EnumMap<ChestType, SpriteId>> SPRITES = createSprites();
+    private final SpriteGetter sprites;
     private final ChestModel singleModel;
     private final ChestModel leftModel;
     private final ChestModel rightModel;
 
     public UoChestBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
-        this.materials = context.materials();
+        this.sprites = context.sprites();
         this.singleModel = new ChestModel(context.bakeLayer(ModelLayers.CHEST));
         this.leftModel = new ChestModel(context.bakeLayer(ModelLayers.DOUBLE_CHEST_LEFT));
         this.rightModel = new ChestModel(context.bakeLayer(ModelLayers.DOUBLE_CHEST_RIGHT));
@@ -50,7 +49,7 @@ public final class UoChestBlockEntityRenderer implements BlockEntityRenderer<UoC
         state.angle = direction.toYRot();
         state.open = blockEntity.getOpenNess(partialTick);
         state.type = type;
-        state.material = materialFor(blockEntity.getTier(), type);
+        state.sprite = spriteFor(blockEntity.getTier(), type);
     }
 
     @Override
@@ -62,16 +61,15 @@ public final class UoChestBlockEntityRenderer implements BlockEntityRenderer<UoC
 
         float open = 1.0F - state.open;
         open = 1.0F - open * open * open;
-        RenderType renderType = state.material.renderType(texture -> Sheets.chestSheet());
         collector.submitModel(
                 modelFor(state.type),
                 open,
                 poseStack,
-                renderType,
                 state.lightCoords,
                 OverlayTexture.NO_OVERLAY,
                 -1,
-                materials.get(state.material),
+                state.sprite,
+                sprites,
                 0,
                 state.breakProgress
         );
@@ -88,22 +86,22 @@ public final class UoChestBlockEntityRenderer implements BlockEntityRenderer<UoC
         return singleModel;
     }
 
-    private static Material materialFor(UpgradeTier tier, ChestType type) {
-        return MATERIALS.get(tier).get(type);
+    private static SpriteId spriteFor(UpgradeTier tier, ChestType type) {
+        return SPRITES.get(tier).get(type);
     }
 
-    private static EnumMap<UpgradeTier, EnumMap<ChestType, Material>> createMaterials() {
-        EnumMap<UpgradeTier, EnumMap<ChestType, Material>> materials =
+    private static EnumMap<UpgradeTier, EnumMap<ChestType, SpriteId>> createSprites() {
+        EnumMap<UpgradeTier, EnumMap<ChestType, SpriteId>> sprites =
                 new EnumMap<>(UpgradeTier.class);
         for (UpgradeTier tier : UpgradeTier.values()) {
-            EnumMap<ChestType, Material> tierMaterials = new EnumMap<>(ChestType.class);
+            EnumMap<ChestType, SpriteId> tierSprites = new EnumMap<>(ChestType.class);
             for (ChestType type : ChestType.values()) {
                 String variant = switch (type) {
                     case LEFT -> "left";
                     case RIGHT -> "right";
                     case SINGLE -> "single";
                 };
-                tierMaterials.put(type, new Material(
+                tierSprites.put(type, new SpriteId(
                         Sheets.CHEST_SHEET,
                         Identifier.fromNamespaceAndPath(
                                 UoUpgradeKits.MOD_ID,
@@ -111,8 +109,8 @@ public final class UoChestBlockEntityRenderer implements BlockEntityRenderer<UoC
                         )
                 ));
             }
-            materials.put(tier, tierMaterials);
+            sprites.put(tier, tierSprites);
         }
-        return materials;
+        return sprites;
     }
 }

@@ -76,14 +76,14 @@ public final class TieredBundleItem extends BundleItem {
     @Override
     public int getBarWidth(ItemStack stack) {
         BundleContents contents = stack.getOrDefault(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY);
-        float fullness = contents.weight().floatValue() / tier.bundleCapacity;
+        float fullness = contents.weight().getOrThrow().floatValue() / tier.bundleCapacity;
         return Math.min(1 + (int) (fullness * 12.0F), 13);
     }
 
     @Override
     public int getBarColor(ItemStack stack) {
         BundleContents contents = stack.getOrDefault(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY);
-        boolean full = contents.weight().compareTo(Fraction.getFraction(tier.bundleCapacity, 1)) >= 0;
+        boolean full = contents.weight().getOrThrow().compareTo(Fraction.getFraction(tier.bundleCapacity, 1)) >= 0;
         return full
                 ? ARGB.colorFromFloat(1.0F, 1.0F, 0.33F, 0.33F)
                 : ARGB.colorFromFloat(1.0F, 0.44F, 0.53F, 1.0F);
