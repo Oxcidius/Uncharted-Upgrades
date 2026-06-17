@@ -30,12 +30,17 @@ final class UoRecipeProvider implements DataProvider {
     };
 
     private final Path recipesPath;
+    private final Path recipeAdvancementsPath;
 
     UoRecipeProvider(FabricPackOutput output) {
-        this.recipesPath = output.getOutputFolder()
+        Path modDataPath = output.getOutputFolder()
                 .resolve("data")
-                .resolve(MOD_ID)
-                .resolve("recipe");
+                .resolve(MOD_ID);
+        this.recipesPath = modDataPath.resolve("recipe");
+        this.recipeAdvancementsPath = modDataPath
+                .resolve("advancement")
+                .resolve("recipes")
+                .resolve("misc");
     }
 
     @Override
@@ -61,6 +66,15 @@ final class UoRecipeProvider implements DataProvider {
                 3
         );
         save(output, writes, "kit_template", template);
+        saveRecipeUnlock(
+                output,
+                writes,
+                "kit_template",
+                "has_leather",
+                "minecraft:leather",
+                "has_cobblestone",
+                "#uncharted_upgrades:cobblestone_variants"
+        );
 
         for (int tierIndex = 0; tierIndex < TIERS.length; tierIndex++) {
             String tier = TIERS[tierIndex];
@@ -71,6 +85,15 @@ final class UoRecipeProvider implements DataProvider {
                     mod(tier + "_upgrade_kit"),
                     1
             ));
+            saveRecipeUnlock(
+                    output,
+                    writes,
+                    tier + "_upgrade_kit",
+                    "has_kit_template",
+                    mod("kit_template"),
+                    "has_tier_ingredient",
+                    INGREDIENTS[tierIndex]
+            );
 
             JsonArray ingredients = new JsonArray();
             for (int includedTier = 0; includedTier <= tierIndex; includedTier++) {
@@ -82,6 +105,13 @@ final class UoRecipeProvider implements DataProvider {
             conversion.add("ingredients", ingredients);
             conversion.add("result", result(mod(tier + "_conversion_kit"), 1));
             save(output, writes, tier + "_conversion_kit", conversion);
+            saveRecipeUnlock(
+                    output,
+                    writes,
+                    tier + "_conversion_kit",
+                    "has_upgrade_kit",
+                    mod(tier + "_upgrade_kit")
+            );
         }
     }
 
@@ -237,6 +267,62 @@ final class UoRecipeProvider implements DataProvider {
             JsonObject json
     ) {
         writes.add(DataProvider.saveStable(output, json, recipesPath.resolve(name + ".json")));
+    }
+
+    private void saveRecipeUnlock(
+            CachedOutput output,
+            List<CompletableFuture<?>> writes,
+            String recipeName,
+            String... inventoryCriteria
+    ) {
+        JsonObject advancement = new JsonObject();
+        advancement.addProperty("parent", "minecraft:recipes/root");
+
+        JsonObject criteria = new JsonObject();
+        JsonArray requirements = new JsonArray();
+        JsonArray requirementSet = new JsonArray();
+        for (int index = 0; index < inventoryCriteria.length; index += 2) {
+            String criterionName = inventoryCriteria[index];
+            criteria.add(criterionName, inventoryCriterion(inventoryCriteria[index + 1]));
+            requirementSet.add(criterionName);
+        }
+        criteria.add("has_the_recipe", recipeUnlockedCriterion(mod(recipeName)));
+        requirementSet.add("has_the_recipe");
+        requirements.add(requirementSet);
+
+        JsonObject rewards = new JsonObject();
+        JsonArray recipes = new JsonArray();
+        recipes.add(mod(recipeName));
+        rewards.add("recipes", recipes);
+
+        advancement.add("criteria", criteria);
+        advancement.add("requirements", requirements);
+        advancement.add("rewards", rewards);
+        writes.add(DataProvider.saveStable(output, advancement, recipeAdvancementsPath.resolve(recipeName + ".json")));
+    }
+
+    private static JsonObject inventoryCriterion(String itemOrTag) {
+        JsonObject criterion = new JsonObject();
+        criterion.addProperty("trigger", "minecraft:inventory_changed");
+
+        JsonObject item = new JsonObject();
+        item.addProperty("items", itemOrTag);
+        JsonArray items = new JsonArray();
+        items.add(item);
+
+        JsonObject conditions = new JsonObject();
+        conditions.add("items", items);
+        criterion.add("conditions", conditions);
+        return criterion;
+    }
+
+    private static JsonObject recipeUnlockedCriterion(String recipeId) {
+        JsonObject criterion = new JsonObject();
+        criterion.addProperty("trigger", "minecraft:recipe_unlocked");
+        JsonObject conditions = new JsonObject();
+        conditions.addProperty("recipe", recipeId);
+        criterion.add("conditions", conditions);
+        return criterion;
     }
 
     private static String mod(String path) {
