@@ -130,7 +130,7 @@ public final class UoShulkerBlock extends ShulkerBoxBlock {
                         state.getValue(FACING),
                         0.0F,
                         0.5F,
-                        pos.getBottomCenter()
+                        new Vec3(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D)
                 )
                 .deflate(1.0E-6D);
         return level.noCollision(openingBox);

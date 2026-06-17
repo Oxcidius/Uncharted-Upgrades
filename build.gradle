@@ -51,6 +51,9 @@ dependencies {
             fileTree("../mods") {
                 include "jei-*-fabric-*.jar"
             },
+            fileTree("$projectDir/../../../${project.minecraft_version}/minecraft/mods") {
+                include "jei-*-fabric-*.jar"
+            },
             fileTree("$projectDir/../../../26.1.2/minecraft/mods") {
                 include "jei-*-fabric-*.jar"
             }
@@ -70,9 +73,10 @@ def releaseVersion = project.version
 
 processResources {
     inputs.property 'version', releaseVersion
+    inputs.property 'minecraft_version', project.minecraft_version
 
     filesMatching('fabric.mod.json') {
-        expand 'version': releaseVersion
+        expand 'version': releaseVersion, 'minecraft_version': project.minecraft_version
     }
 }
 
@@ -132,9 +136,11 @@ task copyJarToMods(type: Copy) {
     dependsOn jar
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
     from { tasks.named('jar').get().archiveFile.get().asFile }
-    into "$projectDir/../../../26.1.2/minecraft/mods"
+    into "$projectDir/../../../${project.minecraft_version}/minecraft/mods"
     doFirst {
-        delete(file("$projectDir/../../../26.1.2/minecraft/mods/${tasks.named('jar').get().archiveFileName.get()}"))
+        delete(fileTree("$projectDir/../../../${project.minecraft_version}/minecraft/mods") {
+            include "${project.archives_base_name}-*.jar"
+        })
     }
     outputs.upToDateWhen { false }
 }
