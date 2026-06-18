@@ -71,7 +71,7 @@ jobs:
       - name: Upload to Modrinth
         env:
           MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
-          PROJECT_ID: ${{ inputs.project_id }}
+          PROJECT_ID_OR_SLUG: ${{ inputs.project_id }}
           VERSION_NUMBER: ${{ inputs.version_number }}+${{ matrix.minecraft }}
           VERSION_NAME: Uncharted Upgrades ${{ inputs.version_number }} for Minecraft ${{ matrix.minecraft }}
           VERSION_TYPE: ${{ inputs.version_type }}
@@ -80,6 +80,20 @@ jobs:
           MINECRAFT_VERSION: ${{ matrix.minecraft }}
           ASSET: ${{ matrix.asset }}
         run: |
+          curl --fail-with-body \
+            --header "Authorization: ${MODRINTH_TOKEN}" \
+            --header "User-Agent: Oxcidius/Uncharted-Upgrades GitHubActions" \
+            "https://api.modrinth.com/v2/project/${PROJECT_ID_OR_SLUG}" \
+            --output modrinth-project.json
+
+          RESOLVED_PROJECT_ID="$(python3 - <<'PY'
+          import json
+          with open("modrinth-project.json", encoding="utf-8") as handle:
+              print(json.load(handle)["id"])
+          PY
+          )"
+          export RESOLVED_PROJECT_ID
+
           python3 - <<'PY' > modrinth-data.json
           import json
           import os
@@ -94,7 +108,7 @@ jobs:
               "loaders": ["fabric"],
               "featured": False,
               "requested_status": os.environ["REQUESTED_STATUS"],
-              "project_id": os.environ["PROJECT_ID"],
+              "project_id": os.environ["RESOLVED_PROJECT_ID"],
               "file_parts": ["file"],
               "primary_file": "file",
           }
