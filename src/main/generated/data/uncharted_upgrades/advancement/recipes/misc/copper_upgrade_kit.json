@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_kit_template": {
+      "conditions": {
+        "items": [
+          {
+            "items": "uncharted_upgrades:kit_template"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "uncharted_upgrades:copper_upgrade_kit"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_tier_ingredient": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:copper_ingot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_kit_template",
+      "has_tier_ingredient",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "uncharted_upgrades:copper_upgrade_kit"
+    ]
+  }
+}

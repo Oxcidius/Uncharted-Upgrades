@@ -1,0 +1,109 @@
+name: Publish to Modrinth
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "GitHub Release tag containing the three jar assets"
+        required: true
+        default: "v0.1.2"
+      project_id:
+        description: "Modrinth project slug or ID"
+        required: true
+        default: "uncharted-upgrades"
+      version_number:
+        description: "Base mod version"
+        required: true
+        default: "0.1.2"
+      version_type:
+        description: "Modrinth version type"
+        required: true
+        default: "release"
+        type: choice
+        options:
+          - release
+          - beta
+          - alpha
+      requested_status:
+        description: "Upload status"
+        required: true
+        default: "draft"
+        type: choice
+        options:
+          - draft
+          - unlisted
+          - listed
+      changelog:
+        description: "Version changelog"
+        required: true
+        default: "Adds recipe-book unlocks for Kit Templates, Upgrade Kits, and Conversion Kits."
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    name: Publish ${{ matrix.minecraft }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - minecraft: "1.21.11"
+            asset: "uncharted-upgrades-0.1.2+1.21.11.jar"
+          - minecraft: "26.1.2"
+            asset: "uncharted-upgrades-0.1.2+26.1.2.jar"
+          - minecraft: "26.2"
+            asset: "uncharted-upgrades-0.1.2+26.2.jar"
+
+    steps:
+      - name: Download jar from GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p dist
+          gh release download "${{ inputs.release_tag }}" \
+            --repo "${{ github.repository }}" \
+            --pattern "${{ matrix.asset }}" \
+            --dir dist
+          test -f "dist/${{ matrix.asset }}"
+
+      - name: Upload to Modrinth
+        env:
+          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+          PROJECT_ID: ${{ inputs.project_id }}
+          VERSION_NUMBER: ${{ inputs.version_number }}+${{ matrix.minecraft }}
+          VERSION_NAME: Uncharted Upgrades ${{ inputs.version_number }} for Minecraft ${{ matrix.minecraft }}
+          VERSION_TYPE: ${{ inputs.version_type }}
+          REQUESTED_STATUS: ${{ inputs.requested_status }}
+          CHANGELOG: ${{ inputs.changelog }}
+          MINECRAFT_VERSION: ${{ matrix.minecraft }}
+          ASSET: ${{ matrix.asset }}
+        run: |
+          python3 - <<'PY' > modrinth-data.json
+          import json
+          import os
+
+          data = {
+              "name": os.environ["VERSION_NAME"],
+              "version_number": os.environ["VERSION_NUMBER"],
+              "changelog": os.environ["CHANGELOG"],
+              "dependencies": [],
+              "game_versions": [os.environ["MINECRAFT_VERSION"]],
+              "version_type": os.environ["VERSION_TYPE"],
+              "loaders": ["fabric"],
+              "featured": False,
+              "requested_status": os.environ["REQUESTED_STATUS"],
+              "project_id": os.environ["PROJECT_ID"],
+              "file_parts": ["file"],
+              "primary_file": "file",
+          }
+          print(json.dumps(data))
+          PY
+
+          curl --fail-with-body \
+            --request POST "https://api.modrinth.com/v2/version" \
+            --header "Authorization: ${MODRINTH_TOKEN}" \
+            --header "User-Agent: Oxcidius/Uncharted-Upgrades GitHubActions" \
+            --form "data=<modrinth-data.json;type=application/json" \
+            --form "file=@dist/${ASSET};filename=${ASSET}"

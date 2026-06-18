@@ -228,7 +228,7 @@ public final class UoShulkerBlockEntity extends RandomizableContainerBlockEntity
                 direction,
                 progressOld,
                 progress,
-                pos.getBottomCenter()
+                new Vec3(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D)
         );
         for (Entity entity : level.getEntities(null, movement)) {
             if (entity.getPistonPushReaction() == PushReaction.IGNORE) {
